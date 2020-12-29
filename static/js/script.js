@@ -1,0 +1,96 @@
+//variables
+const clearBtn = document.querySelector('.clear') ;
+const ar_textarea = document.querySelector('#ar_textarea');
+const en_textarea = document.querySelector('#en_textarea');
+const en_speakerBtn = document.querySelector('.en-speaker') ;
+const ar_speakerBtn = document.querySelector('.ar-speaker') ;
+const copyBtn = document.querySelector('.copy') ;
+const limitChars = document.querySelector('.limit') ;
+const alertCopy = document.querySelector('.alert-copy') ;
+const footerBtn = document.querySelector('.footerBtn');
+const footer = document.querySelector('.footer-text') ;
+
+//events    
+ar_textarea.addEventListener('input',function(){
+    limitChars.textContent = `${this.value.length}/250`;
+    if(this.value.length == 0){
+        en_textarea.value = '' ;
+    }
+})
+clearBtn.addEventListener('click',()=>{
+    ar_textarea.value = '' ;
+    en_textarea.value = '' ;
+})
+
+//speakers
+en_speakerBtn.addEventListener('click',()=>{
+    text = en_textarea.value ;
+    responsiveVoice.speak(text , "UK English Male");
+})
+ar_speakerBtn.addEventListener('click',()=>{
+    text = ar_textarea.value ;
+    responsiveVoice.speak(text , "Arabic Male");
+})
+//copy text
+copyBtn.addEventListener('click',()=>{
+    if(en_textarea.value != ''){
+        alertCopy.textContent = '. تم نسخ الترجمة' ;
+        copyText(en_textarea) ;
+        raise_alert(alertCopy)
+    }
+    else{
+        alertCopy.textContent = "ادخل النص"
+        raise_alert(alertCopy)
+    }
+})
+function copyText(field){
+      //select text
+      field.select() ;
+      //copy text
+      document.execCommand('copy') ;
+}
+function raise_alert(alert){
+            //raise alert
+            window.setTimeout(()=>{alert.style.bottom = '2px'; },100)
+            window.setTimeout(()=>{alert.style.bottom = '-50px'; },2000)
+}
+// show footer
+let a = 1 ;
+footerBtn.addEventListener('click',()=>{
+    if(a == 1){
+        footer.style.cssText = 'margin-bottom: 0 ;margin-top: 20px' ;
+        a = 0 ;
+    }
+    else if(a == 0){
+        footer.style.cssText = 'margin-bottom: -20px ;margin-top:0' ;
+        a = 1 ;
+    }
+})
+//jquery and ajax
+$(document).ready(function(){
+    //keyboard
+    $('.fa-keyboard').on('click',function(){
+        $('.simple-keyboard').slideToggle('fast');
+    }) ;
+   $ ('#form').on('submit',function(event){
+        
+        $.ajax({
+            data :{inputText : $('#ar_textarea').val()} ,
+            type: 'POST' ,
+            url: '/process'
+        }).done(function(data){
+            if(data.error){
+                // alert('ERROR') ;
+                alertCopy.textContent = 'المرجو إدخال نص'
+                raise_alert(alertCopy)
+            }
+            else {
+                ar_textarea.value = data.inputText ;
+                en_textarea.value = data.outputText ;
+                // console.log(data) ;
+             }
+        }) ;
+        
+        event.preventDefault()
+    }) ;
+}) ;
