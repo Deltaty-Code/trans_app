@@ -11,9 +11,15 @@
     <title>Translation</title>
 </head>
 <body>
- 
+    <!-- <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+-->
+    <div class="presentation">
+        <button class="start">Start Translation</button>
+    </div> 
     <div class="background" id="particles-js"></div>
-    <div class="container">
+    <div class="container" id="particles-js">
         <div class="inner-container" >
             <span class="langs">
                 <p>English</p>
@@ -25,29 +31,29 @@
                     <span class="options1">
                         <span class="en-speaker">
                             <i class="fas fa-volume-up"></i>
-                            <span class="tooltip">listen</span>
+                            <span class="tooltip" id="tip">listen</span>
                         </span> 
                         <span class="copy">
                             <i class="fas fa-copy"></i>
-                            <span class="tooltip">copy translation</span>
+                            <span class="tooltip" id="tip">copy translation</span>
                         </span>
                     </span>
                 </span>
                 <span class="right-column">
-                    <textarea name="ar_input" id='ar_textarea' cols="65" rows="4" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="إدخال نص" dir="rtl" maxlength="250" class="input" ></textarea>
+                    <textarea name="ar_input" id='ar_textarea' cols="65" rows="4" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="إدخال نص" dir="rtl" maxlength="480" class="input" ></textarea>
                     <span class="clear"><i class="fas fa-times"></i></span>
                     <span class="options2">
                         <span>
                             <span class="keyboard">
                                 <i class="fas fa-keyboard"></i>
-                                <span class="tooltip">لوحة مفاتيح افتراضية</span>
+                                <span class="tooltip" id="tip">لوحة مفاتيح افتراضية</span>
                             </span>
                             <span class="ar-speaker">
                                 <i class="fas fa-volume-up"></i>
-                                <span class="tooltip">استمع</span>
+                                <span class="tooltip" id="tip">استمع</span>
                             </span>
                         </span>
-                        <span class="limit">0/250</span>
+                        <span class="limit">0/480</span>
                     </span>
                 </span>
                 
@@ -68,6 +74,5 @@
     <script src="/static/js/index_2.js"></script>
     <script src="/static/js/index.js"></script>
     <script src="../static/js/script.js"></script>
-
 </body>
 </html>

@@ -2,6 +2,7 @@
 @import 'colors' ;
 body {
     font-family: $mainFont;
+    overflow: hidden;
 }
 
 .background {
@@ -13,22 +14,54 @@ body {
     z-index: 1;
     // background: rgb(18, 0, 82);
 }
+.presentation {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgb(2,0,36);
+    display: grid;
+    place-items: center;
+    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(38,21,163,1) 24%, rgba(0,212,255,1) 100%);
+    .start{
+        position: absolute;
+        cursor: pointer;
+        z-index: 2;
+        padding: 10px 20px;
+        font-size: 1.5rem;
+        color: white;
+        outline: none;
+        border: none;
+        background: rgba(0,0,0,0.3);
+        border-radius: 10px;
+        box-shadow: 0 3px #000 rgba(0,0,0,0.16);
+        transition: 0.2s ease;
+        &:hover {
+            background: rgba(0,0,0,0.4);
+        }
 
+    }
+}
 .container {
     position: relative;
+    // top: 100vh;
+    // background: #fff;
     height: 100vh;
     width: 100%;
     overflow: hidden;
-    display: grid;
+    // display: grid; //intial display
+    // z-index: 5;
+    display: none;
     .simple-keyboard {
-      max-width: 550px;
+      width: 550px;
       position: absolute;
       bottom: 0;
       left:0;
       z-index: 200;
-      opacity: 0.75;
+      opacity: 0.9;
       display: none;
       user-select: none;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
     }
     .inner-container {
          position: absolute;
@@ -36,11 +69,11 @@ body {
          left: 50%;
          transform: translateX(-50%);
          z-index: 2;
+         width: 90%;
         .langs{
             display: flex;
             justify-content: space-between;
-            background: $color1 ;
-            // background: linear-gradient(to right,$g1,$g2) ;
+            background: rgba(0,0,0,0.6);
             color: $white;
             border-radius: 12px 12px 0 0;
             padding: 6px 15px;
@@ -54,22 +87,26 @@ body {
             display: flex;
             .btn {
               position: absolute;
-              top: 115%;
+              top: 108%;
               left: 50%;
               transform: translateX(-50%);
               border: none;
               outline: none;
-              padding: 10px 40px;
+              padding: 10px 50px;
               font-size: 1.5rem;
               color: $white;
-              background: $color1;
+              background: rgba(0,0,0,0.3);
+              border-radius: 10px;
               cursor: pointer;
               box-shadow: 0 3px #000 rgba(0,0,0,0.16);
               transition: all 0.2s ease;
               border-radius: 10px;
               &:hover{
-                background: lighten($color1,15%);
+                background: rgba(0,0,0,0.4);
               }
+              &:active{
+                transform: translate(-50%,5px);
+            }
             }
             textarea {
               padding: 20px;
@@ -124,6 +161,7 @@ body {
                 ::selection{
                     background-color: transparent;
                 }
+                textarea {width: 100%;}
             }
             .right-column {
                 position: relative;
@@ -175,7 +213,7 @@ body {
                     transition: 0.15s ease;
                     &:hover{opacity: 0.9;}
                 }
-
+                textarea {width: 100%;}
             }
 
         }
@@ -208,24 +246,65 @@ body {
         .footerBtn{
             display: block;
             cursor: pointer;
-            padding: 0 20px ;
-            font-size: 1.7rem;
+            // padding: 0 20px ;
+            font-size: 1.5rem;
             animation: animate 1.3s ease infinite alternate-reverse;
             transition: 0.15s ease;
             text-align: center;
-            color: $color1;
-            &:hover{
-
-            }
+            color: $white;
         }
         .footer-text {
             margin-bottom: -20px;
             transition: all 0.2s ease-in-out;
-            color: $color1;
+            color: $white;
         }
     }
     @keyframes animate {
         // 0%{transform: translateY(0px);}
-        100%{transform: translateY(10px);}
+        100%{transform: translateY(5px);}
     }
+}
+@media(max-width:1200px){
+    .container {
+        .simple-keyboard {
+            width: 100%;
+            
+        }
+    .inner-container {
+        // width: 600px;
+    }
+    #form{
+        display: flex;
+        flex-direction: column;
+        .btn {
+            top: 80%;
+        }
+        .left-column{
+            order: 2;
+            width: 100%;
+            textarea {width: 100%;}
+            border-top: 1px solid $softGray;
+            border-bottom-right-radius: 12px;
+            overflow: hidden;
+            
+        }
+        .right-column {
+            width: 100%;
+            textarea {width: 100%;}
+        }
+        #tip {display: none;}
+    }
+}
+}
+@media(max-width:400px){
+    .container{
+        .footer {display: none;}
+        #form {
+            .right-column{
+                .options2 {
+                    .keyboard {display: none;}
+                }
+            }
+        }
+}
 }

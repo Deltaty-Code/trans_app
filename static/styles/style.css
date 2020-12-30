@@ -8,6 +8,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
 .background {
@@ -19,23 +20,54 @@ body {
   z-index: 1;
 }
 
+.presentation {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: #020024;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(45deg, #020024 0%, #2615a3 24%, #00d4ff 100%);
+}
+
+.presentation .start {
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  color: white;
+  outline: none;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 3px #000 rgba(0, 0, 0, 0.16);
+  transition: 0.2s ease;
+}
+
+.presentation .start:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
 .container {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  display: grid;
+  display: none;
 }
 
 .container .simple-keyboard {
-  max-width: 550px;
+  width: 550px;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 200;
-  opacity: 0.75;
+  opacity: 0.9;
   display: none;
   user-select: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
 .container .inner-container {
@@ -44,12 +76,13 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  width: 90%;
 }
 
 .container .inner-container .langs {
   display: flex;
   justify-content: space-between;
-  background: #042d57;
+  background: rgba(0, 0, 0, 0.6);
   color: #FFF;
   border-radius: 12px 12px 0 0;
   padding: 6px 15px;
@@ -66,15 +99,16 @@ body {
 
 .container .inner-container #form .btn {
   position: absolute;
-  top: 115%;
+  top: 108%;
   left: 50%;
   transform: translateX(-50%);
   border: none;
   outline: none;
-  padding: 10px 40px;
+  padding: 10px 50px;
   font-size: 1.5rem;
   color: #FFF;
-  background: #042d57;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 3px #000 rgba(0, 0, 0, 0.16);
   transition: all 0.2s ease;
@@ -82,7 +116,11 @@ body {
 }
 
 .container .inner-container #form .btn:hover {
-  background: #0753a0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.container .inner-container #form .btn:active {
+  transform: translate(-50%, 5px);
 }
 
 .container .inner-container #form textarea {
@@ -191,6 +229,10 @@ body {
 
 .container .inner-container #form .left-column ::selection {
   background-color: transparent;
+}
+
+.container .inner-container #form .left-column textarea {
+  width: 100%;
 }
 
 .container .inner-container #form .right-column {
@@ -310,6 +352,10 @@ body {
   opacity: 0.9;
 }
 
+.container .inner-container #form .right-column textarea {
+  width: 100%;
+}
+
 .container .alert-copy {
   position: absolute;
   bottom: -50px;
@@ -340,22 +386,62 @@ body {
 .container .footer .footerBtn {
   display: block;
   cursor: pointer;
-  padding: 0 20px;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   animation: animate 1.3s ease infinite alternate-reverse;
   transition: 0.15s ease;
   text-align: center;
-  color: #042d57;
+  color: #FFF;
 }
 
 .container .footer .footer-text {
   margin-bottom: -20px;
   transition: all 0.2s ease-in-out;
-  color: #042d57;
+  color: #FFF;
 }
 
 @keyframes animate {
   100% {
-    transform: translateY(10px);
+    transform: translateY(5px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .container .simple-keyboard {
+    width: 100%;
+  }
+  .container #form {
+    display: flex;
+    flex-direction: column;
+  }
+  .container #form .btn {
+    top: 80%;
+  }
+  .container #form .left-column {
+    order: 2;
+    width: 100%;
+    border-top: 1px solid #e6e6e6;
+    border-bottom-right-radius: 12px;
+    overflow: hidden;
+  }
+  .container #form .left-column textarea {
+    width: 100%;
+  }
+  .container #form .right-column {
+    width: 100%;
+  }
+  .container #form .right-column textarea {
+    width: 100%;
+  }
+  .container #form #tip {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .container .footer {
+    display: none;
+  }
+  .container #form .right-column .options2 .keyboard {
+    display: none;
   }
 }

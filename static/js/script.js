@@ -9,10 +9,13 @@ const limitChars = document.querySelector('.limit') ;
 const alertCopy = document.querySelector('.alert-copy') ;
 const footerBtn = document.querySelector('.footerBtn');
 const footer = document.querySelector('.footer-text') ;
-
+const startBtn = document.querySelector('.start') ;
+const container = document.querySelector('.container') ;
+const presentation = document.querySelector('.presentation') ;
 //events    
+
 ar_textarea.addEventListener('input',function(){
-    limitChars.textContent = `${this.value.length}/250`;
+    limitChars.textContent = `${this.value.length}/480`;
     if(this.value.length == 0){
         en_textarea.value = '' ;
     }
@@ -58,7 +61,7 @@ function raise_alert(alert){
 let a = 1 ;
 footerBtn.addEventListener('click',()=>{
     if(a == 1){
-        footer.style.cssText = 'margin-bottom: 0 ;margin-top: 20px' ;
+        footer.style.cssText = 'margin-bottom: 0 ;margin-top: 5px' ;
         a = 0 ;
     }
     else if(a == 0){
@@ -68,6 +71,11 @@ footerBtn.addEventListener('click',()=>{
 })
 //jquery and ajax
 $(document).ready(function(){
+    $('.start').click(function(){
+        $('.container').fadeIn('slow');
+        $(this).hide();
+    });
+    $('.loader-container').fadeOut() ;    
     //keyboard
     $('.fa-keyboard').on('click',function(){
         $('.simple-keyboard').slideToggle('fast');
@@ -87,7 +95,7 @@ $(document).ready(function(){
             else {
                 ar_textarea.value = data.inputText ;
                 en_textarea.value = data.outputText ;
-                // console.log(data) ;
+                console.log(data) ;
              }
         }) ;
         

@@ -16,13 +16,6 @@ def process():
         return jsonify({'inputText' : inputText,'outputText': outputText})
 
     return jsonify({'error' : 'Missing data!'})
-# def index():
-#     if request.method == 'POST':
-#         input_text = request.form['ar_input']  
-#         if input_text != '':
-#             t = trans.translate(input_text ,src = 'ar' ,dest ='en')
-#             output_text = t.text
-#     return render_template('index.html',output_text = output_text,input_text = input_text)
 
 if __name__ == "__main__":
     app.run(debug = True)
