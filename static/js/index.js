@@ -10,17 +10,21 @@ let keyboard = new Keyboard({
  */
 document.querySelector(".input").addEventListener("input", event => {
   keyboard.setInput(event.target.value);
+  clearBtn.addEventListener('click',()=>{
+    keyboard.setInput('');
+ }) ;
 });
 
 console.log(keyboard);
 
 function onChange(input) {
   document.querySelector(".input").value = input;
-  console.log("Input changed", input);
+
+  limitChars.textContent = `${document.querySelector(".input").value.length}/480`;
 }
 
 function onKeyPress(button) {
-  console.log("Button pressed", button);
+  // console.log("Button pressed", button);
 
   /**
    * If you want to handle the shift and caps lock buttons
