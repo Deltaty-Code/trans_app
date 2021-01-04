@@ -12,7 +12,7 @@ const footer = document.querySelector('.footer-text') ;
 const startBtn = document.querySelector('.start') ;
 const container = document.querySelector('.container') ;
 const presentation = document.querySelector('.presentation') ;
-//events    
+//events
 
 ar_textarea.addEventListener('input',function(){
     limitChars.textContent = `${this.value.length}/480`;
@@ -23,6 +23,7 @@ ar_textarea.addEventListener('input',function(){
 clearBtn.addEventListener('click',()=>{
     ar_textarea.value = '' ;
     en_textarea.value = '' ;
+    limitChars.textContent = '0/480';
 })
 
 //speakers
@@ -75,13 +76,13 @@ $(document).ready(function(){
         $('.container').fadeIn('slow');
         $(this).hide();
     });
-    $('.loader-container').fadeOut() ;    
+    $('.loader-container').fadeOut() ;
     //keyboard
     $('.fa-keyboard').on('click',function(){
         $('.simple-keyboard').slideToggle('fast');
     }) ;
    $ ('#form').on('submit',function(event){
-        
+
         $.ajax({
             data :{inputText : $('#ar_textarea').val()} ,
             type: 'POST' ,
@@ -98,7 +99,7 @@ $(document).ready(function(){
                 console.log(data) ;
              }
         }) ;
-        
+
         event.preventDefault()
     }) ;
 }) ;
